@@ -40,135 +40,135 @@ class CompareTeller implements Comparator<Teller>
 class ServiceArea
 {
     // Private data fields:
-    
+
     // define one priority queue
     private PriorityQueue<Teller> busyTellerQ;
-    
+
     // define two FIFO queues
     private Queue<Customer> customerQ;
     private Queue<Teller> freeTellerQ;
-    
+
     // define customer queue limit
     private int customerQLimit;
-    
-    // Constructor 
-    public ServiceArea() 
+
+    // Constructor
+    public ServiceArea()
     {
         this(1,1,1);
     }
-    
-    // Constructor 
+
+    // Constructor
     public ServiceArea(int numTellers, int customerQlimit, int startTellerID)
     {
         // use ArrayDeque to construct FIFO queue objects
         customerQ = new ArrayDeque<Customer>(customerQlimit);
         freeTellerQ = new ArrayDeque<Teller>(numTellers);
-        
+
         // construct PriorityQueue object
         // overide compare() in Comparator to compare Teller objects
-        busyTellerQ = new PriorityQueue<Teller>( numTellers, new CompareTeller()); 
-        
+        busyTellerQ = new PriorityQueue<Teller>( numTellers, new CompareTeller());
+
         // initialize customerQlimit
         customerQLimit = customerQlimit;
-        
+
         // Construct Teller objects and insert into FreeTellerQ
         for (int i = 0; i < numTellers; i++) {
             insertFreeTellerQ( new Teller(startTellerID++) );
         }
     }
-    
+
     public Teller removeFreeTellerQ()
     {
         // remove and return a free teller
         return freeTellerQ.poll();
     }
-    
-    public Teller removeBusyTellerQ() 
+
+    public Teller removeBusyTellerQ()
     {
         // remove and return a busy teller
         return busyTellerQ.poll();
     }
-    
+
     public Customer removeCustomerQ()
     {
-        // remove and return a customer 
+        // remove and return a customer
         return customerQ.poll();
     }
-    
+
     public void insertFreeTellerQ(Teller teller)
     {
         // insert a free teller
         freeTellerQ.add(teller);
     }
-    
+
     public void insertBusyTellerQ(Teller teller)
     {
         // insert a busy teller
         busyTellerQ.add(teller);
     }
-    
+
     public void insertCustomerQ(Customer customer)
     {
         // insert a customer
         customerQ.add(customer);
     }
-    
+
     public boolean emptyFreeTellerQ()
     {
         // is freeTellerQ empty?
         return freeTellerQ.isEmpty();
     }
-    
+
     public boolean emptyBusyTellerQ()
     {
         // is busyTellerQ empty?
         return busyTellerQ.isEmpty();
     }
-    
+
     public boolean emptyCustomerQ()
     {
         // is customerQ empty?
         return customerQ.isEmpty();
     }
-    
+
     public int numFreeTellers()
     {
         // get number of free tellers
         return freeTellerQ.size();
     }
-    
+
     public int numBusyTellers()
     {
         // get number of busy tellers
         return busyTellerQ.size();
     }
-    
+
     public int numWaitingCustomers()
     {
-        // get number of customers 
+        // get number of customers
         return customerQ.size();
     }
-    
-    public Teller getFrontBusyTellerQ() 
+
+    public Teller getFrontBusyTellerQ()
     {
         // get front of busy tellers
         // "retrieve" but not "remove"
         return busyTellerQ.peek();
     }
-    
+
     public boolean isCustomerQTooLong()
     {
         // is customerQ too long?
         return customerQ.size() == customerQLimit;
     }
-    
+
     public void printStatistics()
     {
         System.out.println("\t\t# waiting customers : "+numWaitingCustomers());
         System.out.println("\t\t# busy tellers      : "+numBusyTellers());
         System.out.println("\t\t# free tellers      : "+numFreeTellers());
     }
-    
+
     public static void main(String[] args)
     {
         // quick check
@@ -184,7 +184,7 @@ class ServiceArea
         System.out.println("Remove customer:"+sc.removeCustomerQ());
         System.out.println("Remove customer:"+sc.removeCustomerQ());
         System.out.println("Remove customer:"+sc.removeCustomerQ());
-        
+
         System.out.println(""+sc.freeTellerQ);
         Teller p1=sc.removeFreeTellerQ();
         Teller p2=sc.removeFreeTellerQ();
@@ -194,7 +194,7 @@ class ServiceArea
         System.out.println("Remove free teller:"+p2);
         System.out.println("Remove free teller:"+p3);
         System.out.println("Remove free teller:"+p4);
-        
+
         p1.freeToBusy (c1, 13);
         p2.freeToBusy (c2, 13);
         p3.freeToBusy (c3, 13);
@@ -213,5 +213,5 @@ class ServiceArea
         System.out.println("Remove busy teller:"+p3);
         System.out.println("Remove busy teller:"+p4);
     }
-    
+
 }
