@@ -1,4 +1,4 @@
-package PJ3;
+package simulator;
 
 import java.util.*;
 
