@@ -25,11 +25,10 @@ import java.util.*;
 // User can define own comparator class for PriorityQueue.
 // For teller objects, we like to have smallest end busy interval time first.
 //
-// The following class define compare() for two tellers :
+// The following class defines compare() for two tellers :
 
 class CompareTeller implements Comparator<Teller>
 {
-    // override compare() method
     @Override
     public int compare(Teller o1, Teller o2)
     {
@@ -48,16 +47,13 @@ class ServiceArea
     private Queue<Customer> customerQ;
     private Queue<Teller> freeTellerQ;
 
-    // define customer queue limit
     private int customerQLimit;
 
-    // Constructor
     public ServiceArea()
     {
         this(1,1,1);
     }
 
-    // Constructor
     public ServiceArea(int numTellers, int customerQlimit, int startTellerID)
     {
         // use ArrayDeque to construct FIFO queue objects

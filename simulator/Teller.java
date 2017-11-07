@@ -15,13 +15,11 @@ class Teller
     private int totalBusyTime;
     private int totalCustomers;
 
-    // Constructor
     Teller()
     {
         this(1);
     }
 
-    // Constructor with teller id
     Teller(int tellerId)
     {
         tellerID = tellerId;
@@ -47,7 +45,7 @@ class Teller
     }
 
     // functions for state transition
-    // FREE -> BUSY :
+
     void freeToBusy (Customer currentCustomer, int currentTime)
     {
         // Main goal : switch from free interval to busy interval
@@ -64,7 +62,6 @@ class Teller
         totalCustomers++;
     }
 
-    // BUSY -> FREE :
     Customer busyToFree ()
     {
         // Main goal : switch from busy interval to free interval
@@ -97,6 +94,7 @@ class Teller
     }
 
     // functions for printing statistics :
+    
     void printStatistics ()
     {
         // print teller statistics, see project statement
